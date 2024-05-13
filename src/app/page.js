@@ -33,15 +33,24 @@ export default function Home() {
         setAllItems(combinedItems);
       });
   }, []);
-
+  console.log(allItems);
   return (
     <main className="flex min-h-screen flex-col items-center justify-between max-w-[1480px] mx-auto px-5 mt-16">
       <section>
         <h2 className="text-[28px] font-bold -tracking-[1.7px]">Flash Sale</h2>
         <div className="flex flex-wrap justify-center gap-x-[48px]">
-          {allItems.map((item, index) => (
-            <Card key={index} item={item} />
-          ))}
+          {allItems.map((item, index) => {
+            console.log(item);
+            const dynamic_url =
+              item.category == "men's clothing"
+                ? "/mens-clothing"
+                : "/womens-clothing";
+            return (
+              <Link key={index} href={dynamic_url}>
+                <Card item={item} />
+              </Link>
+            );
+          })}
         </div>
       </section>
       <section className="w-full mt-[72px]">
